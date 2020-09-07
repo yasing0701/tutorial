@@ -10,6 +10,12 @@ $factory->define(Borrow::class, function (Faker $faker) {
     $returnDate = $faker->dateTimeBetween($borrowDate, strtotime('+14 days'));
 
     return [
+        'book_id' => function () {
+            return factory(\App\Book::class)->create()->id;
+        },
+        'user_id' => function () {
+            return factory(\App\User::class)->create()->id;
+        },
         'borrow_date' => $borrowDate,
         'return_date' => $returnDate,
     ];
