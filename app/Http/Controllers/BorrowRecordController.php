@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\StoreBorrowRecordRequest;
+use App\Http\Requests\UpdateBorrowRecordRequest;
+use App\Borrow;
 
 class BorrowRecordController extends Controller
 {
@@ -13,7 +15,7 @@ class BorrowRecordController extends Controller
      */
     public function index()
     {
-        //
+        return Borrow::all();
     }
 
     /**
@@ -22,9 +24,13 @@ class BorrowRecordController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreBorrowRecordRequest $request)
     {
-        //
+        $borrowRecord = Borrow::create($request->all());
+
+        return response()->json([
+            'message' => 'You have borrowed this book.'
+        ]);
     }
 
     /**
@@ -33,9 +39,9 @@ class BorrowRecordController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Borrow $borrowRecord)
     {
-        //
+        return $borrowRecord;
     }
 
     /**
@@ -45,9 +51,13 @@ class BorrowRecordController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateBorrowRecordRequest $request, Borrow $borrowRecord)
     {
-        //
+        $borrowRecord->update($request->all());
+
+        return response()->json([
+            'message' => 'Borrow record updated.'
+        ], 200);
     }
 
     /**
@@ -56,8 +66,12 @@ class BorrowRecordController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Borrow $borrowRecord)
     {
-        //
+        $borrowRecord->delete();
+
+        return response()->json([
+            'message' => 'Book deleted!'
+        ]);
     }
 }

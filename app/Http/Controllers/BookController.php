@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\StoreBookRequest;
+use App\Http\Requests\UpdateBookRequest;
+use App\Book;
 
 class BookController extends Controller
 {
@@ -13,7 +15,7 @@ class BookController extends Controller
      */
     public function index()
     {
-        //
+        return Book::all();
     }
 
     /**
@@ -22,9 +24,13 @@ class BookController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreBookRequest $request)
     {
-        //
+        $book = Book::create($request->all());
+
+        return response()->json([
+            'message' => 'Book added.'
+        ]);
     }
 
     /**
@@ -33,9 +39,9 @@ class BookController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Book $book)
     {
-        //
+        return $book;
     }
 
     /**
@@ -45,9 +51,13 @@ class BookController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateBookRequest $request, Book $book)
     {
-        //
+        $book->update($request->all());
+
+        return response()->json([
+            'message' => 'Book detail updated.'
+        ], 200);
     }
 
     /**
@@ -56,8 +66,12 @@ class BookController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Book $book)
     {
-        //
+        $book->delete();
+
+        return response()->json([
+            'message' => 'Book deleted!'
+        ]);
     }
 }
