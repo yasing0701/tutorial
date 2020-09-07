@@ -71,7 +71,7 @@ class BorrowRecordController extends Controller
         $borrowRecord->delete();
 
         return response()->json([
-            'message' => 'Book deleted!'
+            'message' => 'Record deleted!'
         ]);
     }
 }

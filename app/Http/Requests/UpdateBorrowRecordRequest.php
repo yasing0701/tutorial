@@ -25,7 +25,7 @@ class UpdateBorrowRecordRequest extends FormRequest
     {
         return [
             'borrow_date' => 'required|string',
-            'return_date' => 'string|after:borrow_date',
+            'return_date' => 'nullable|string|after:borrow_date',
         ];
     }
 }
