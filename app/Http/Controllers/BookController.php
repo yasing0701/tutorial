@@ -26,7 +26,7 @@ class BookController extends Controller
      */
     public function store(StoreBookRequest $request)
     {
-        $book = Book::create($request->all());
+        Book::create($request->all());
 
         return response()->json([
             'message' => 'Book added.'

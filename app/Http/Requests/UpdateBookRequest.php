@@ -27,7 +27,7 @@ class UpdateBookRequest extends FormRequest
             'title' => 'required|string|max:255',
             'publisher' => 'nullable|string|max:255',
             'year' => 'nullable|string',
-            'quantity' => 'required|integer|max:200',
+            'quantity' => 'required|integer|min:1|max:200',
         ];
     }
 }

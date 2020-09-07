@@ -15,7 +15,7 @@ class BorrowRecordController extends Controller
      */
     public function index()
     {
-        return Borrow::all();
+        return Borrow::with('user', 'book')->get();
     }
 
     /**
@@ -26,7 +26,9 @@ class BorrowRecordController extends Controller
      */
     public function store(StoreBorrowRecordRequest $request)
     {
-        $borrowRecord = Borrow::create($request->all());
+        //$borrowRecord = Borrow::create($request->all()); // no nid $variable
+
+        Borrow::create($request->all());
 
         return response()->json([
             'message' => 'You have borrowed this book.'
