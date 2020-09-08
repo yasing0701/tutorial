@@ -24,8 +24,8 @@ class StoreBorrowRecordRequest extends FormRequest
     public function rules()
     {
         return [
-            'borrow_date' => 'required|string',
-            'return_date' => 'nullable|string|after:borrow_date',
+            'borrow_date' => 'required|string|date_format:Y-m-d H:i:s',
+            'return_date' => 'nullable|string|after:borrow_date|date_format:Y-m-d H:i:s',
         ];
     }
 }
